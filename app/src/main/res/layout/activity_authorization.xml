@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".activity.AuthorizationActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_connect_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/connect"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:layout_marginTop="50dp">
+
+    </androidx.appcompat.widget.AppCompatTextView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_authorization_auth"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_signIn_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/signIn"
+                    android:textColor="@color/black"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/viewColorLight">
+
+                </View>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_signUp_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/signUp"
+                    android:textColor="#757575">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <View
+                    android:id="@+id/view_signIn_auth"
+                    android:layout_width="100dp"
+                    android:layout_height="3dp"
+                    android:background="@color/black"
+                    android:layout_marginEnd="55dp">
+
+                </View>
+
+                <View
+                    android:id="@+id/view_signUp_auth"
+                    android:layout_width="100dp"
+                    android:layout_height="3dp"
+                    android:background="@color/viewColorLight">
+
+                </View>
+
+            </LinearLayout>
+
+
+            <!-- SIGN IN FORM -->
+            <LinearLayout
+                android:id="@+id/ll_signIn_auth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_email_signIn_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_email_signIn_auth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:hint="@string/email"
+                        android:theme="@style/Theme.EditText"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:singleLine="true"
+                        android:scrollHorizontally="true"
+                        android:maxLength="30">
+
+                    </androidx.appcompat.widget.AppCompatEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_password_signIn_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_password_signIn_auth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:theme="@style/Theme.EditText"
+                        android:hint="@string/password"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:maxLength="18">
+
+                    </androidx.appcompat.widget.AppCompatEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_signIn_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_button"
+                    android:backgroundTint="@color/black"
+                    android:text="@string/signIn"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="50dp">
+
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:background="@color/viewColorLight">
+
+                    </View>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/or"
+                        android:textColor="@color/textColor"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp">
+
+                    </androidx.appcompat.widget.AppCompatTextView>
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:background="@color/viewColorLight">
+
+                    </View>
+
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="180dp"
+                    android:layout_height="35dp"
+                    android:backgroundTint="@color/white"
+                    app:strokeColor="@color/black"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_google_signIn_auth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/signIn_with_Google"
+                            android:gravity="center"
+                            android:paddingStart="5dp"
+                            android:layout_marginStart="10dp">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_google_logo"
+                            android:padding="7dp"
+                            android:layout_marginEnd="15dp">
+
+                        </androidx.appcompat.widget.AppCompatImageView>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+
+            <!-- SIGN UP FORM -->
+            <LinearLayout
+                android:id="@+id/ll_signUp_auth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_username_signUp_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_username_signUp_auth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:theme="@style/Theme.EditText"
+                        android:hint="@string/username"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:maxLength="15">
+
+                    </androidx.appcompat.widget.AppCompatEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_email_signUp_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_email_signUp_auth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:theme="@style/Theme.EditText"
+                        android:hint="@string/email"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:singleLine="true"
+                        android:scrollHorizontally="true"
+                        android:maxLength="30">
+
+                    </androidx.appcompat.widget.AppCompatEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_password_signUp_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_password_signUp_auth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:theme="@style/Theme.EditText"
+                        android:hint="@string/password"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:maxLength="18">
+
+                    </androidx.appcompat.widget.AppCompatEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layout_confirmPassword_signUp_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/et_confirmPassword_signUp_auth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/black"
+                        android:theme="@style/Theme.EditText"
+                        android:hint="@string/confirm_password"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:maxLength="18">
+
+                    </androidx.appcompat.widget.AppCompatEditText>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_signUp_auth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_button"
+                    android:backgroundTint="@color/black"
+                    android:text="@string/signUp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="50dp">
+
+                </androidx.appcompat.widget.AppCompatButton>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp">
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:background="@color/viewColorLight">
+
+                    </View>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/or"
+                        android:textColor="@color/textColor"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp">
+
+                    </androidx.appcompat.widget.AppCompatTextView>
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="1dp"
+                        android:background="@color/viewColorLight">
+
+                    </View>
+
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="180dp"
+                    android:layout_height="35dp"
+                    android:backgroundTint="@color/white"
+                    app:strokeColor="@color/black"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="20dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_google_signUp_auth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="@string/signUp_with_Google"
+                            android:gravity="center"
+                            android:paddingStart="5dp"
+                            android:layout_marginStart="10dp">
+
+                        </androidx.appcompat.widget.AppCompatTextView>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_google_logo"
+                            android:padding="7dp"
+                            android:layout_marginEnd="15dp">
+
+                        </androidx.appcompat.widget.AppCompatImageView>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

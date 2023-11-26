@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Gossip</string>
+    <string name="app_name_letter_G">G</string>
+    <string name="app_name_letter_O">O</string>
+    <string name="app_name_letter_S">S</string>
+    <string name="app_name_letter_I">I</string>
+    <string name="app_name_letter_P">P</string>
+    <string name="chat_share_moments">Chat and Share Moments</string>
+
+    <string name="connect">Connect with anyone anonymously</string>
+    <string name="signUp">SIGN UP</string>
+    <string name="signIn">SIGN IN</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="or">OR</string>
+    <string name="signIn_with_Google">Sign in with Google</string>
+    <string name="signUp_with_Google">Sign up with Google</string>
+
+    <string name="email_error_label">Please enter your email</string>
+    <string name="password_error_label">Please enter your password</string>
+    <string name="username_error_label">Please enter your username</string>
+</resources>
