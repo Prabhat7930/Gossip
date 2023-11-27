@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.gossip.R
+import com.example.gossip.data.MongoDB
 import com.example.gossip.databinding.ActivityAuthorizationBinding
 import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.runBlocking
@@ -134,6 +135,7 @@ class AuthorizationActivity : BaseActivity() {
             toastMessage(this@AuthorizationActivity, "Password must be at least 6 characters long")
         }
         else {
+            val username = binding.etUsernameSignUpAuth.text.toString()
             val email = binding.etEmailSignInAuth.text.toString()
             val password = binding.etPasswordSignInAuth.text.toString()
             runBlocking {
@@ -141,6 +143,8 @@ class AuthorizationActivity : BaseActivity() {
                 try {
                     val user = app.login(emailPasswordCred)
                     if (user != null) {
+                        MongoDB.configureTheRealm()
+                        MongoDB.addUserInfo(username, email)
                         toastMessage(this@AuthorizationActivity, "Signing in")
                         startActivity(Intent(this@AuthorizationActivity, MainActivity::class.java))
                         finish()
