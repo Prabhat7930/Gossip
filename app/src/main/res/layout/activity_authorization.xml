@@ -132,7 +132,7 @@
                     android:id="@+id/layout_password_signIn_auth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:endIconMode="password_toggle"
+                    app:passwordToggleEnabled="true"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -292,7 +292,7 @@
                     android:id="@+id/layout_password_signUp_auth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:endIconMode="password_toggle"
+                    app:passwordToggleEnabled="true"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -314,7 +314,7 @@
                     android:id="@+id/layout_confirmPassword_signUp_auth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:endIconMode="password_toggle"
+                    app:passwordToggleEnabled="true"
                     android:layout_marginTop="10dp">
 
                     <androidx.appcompat.widget.AppCompatEditText

@@ -15,11 +15,17 @@ import com.example.gossip.databinding.ActivitySplashscreenBinding
 class SplashScreenActivity : BaseActivity() {
 
     private lateinit var binding : ActivitySplashscreenBinding
+    private var username : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashscreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (intent.hasExtra("username") != null) {
+            username = intent.getStringExtra("username")
+        }
+
 
         binding.tvAppNameG.typeface = ResourcesCompat.getFont(this, R.font.app_name_font)
         binding.tvAppNameO.typeface = ResourcesCompat.getFont(this, R.font.app_name_font)
@@ -47,7 +53,9 @@ class SplashScreenActivity : BaseActivity() {
         binding.ivGossipSplash.startAnimation(gossipAnim)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this@SplashScreenActivity, AuthorizationActivity::class.java))
+            val intent = Intent(this@SplashScreenActivity, AuthorizationActivity::class.java)
+            intent.putExtra("username_logged", username)
+            startActivity(intent)
             finish()
         }, 2000)
     }

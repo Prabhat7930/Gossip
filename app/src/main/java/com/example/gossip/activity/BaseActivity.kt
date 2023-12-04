@@ -7,13 +7,9 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.gossip.utils.Constants
 import com.google.android.material.snackbar.Snackbar
-import io.realm.kotlin.mongodb.App
 
 open class BaseActivity : AppCompatActivity() {
-
-    val app : App = App.create(Constants.APP_ID)
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

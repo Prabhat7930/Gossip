@@ -15,15 +15,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.gossip.R
-import com.example.gossip.data.MongoDB
 import com.example.gossip.databinding.ActivityAuthorizationBinding
-import io.realm.kotlin.mongodb.Credentials
 import kotlinx.coroutines.runBlocking
 
 
 class AuthorizationActivity : BaseActivity() {
 
     private lateinit var binding : ActivityAuthorizationBinding
+    private lateinit var db : DatabaseRef
 
     companion object {
         const val POST_NOTIFICATION_CODE = 101
@@ -34,8 +33,8 @@ class AuthorizationActivity : BaseActivity() {
         binding = ActivityAuthorizationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        db = DatabaseRef(this@AuthorizationActivity)
         var isKeyboardVisible = false
-
         checkPermissions()
 
         binding.tvConnectAuth.typeface = ResourcesCompat.getFont(this, R.font.app_name_font)
@@ -125,82 +124,69 @@ class AuthorizationActivity : BaseActivity() {
     }
 
     private fun signIn() {
-        if (binding.etEmailSignInAuth.text.isNullOrBlank()) {
-            toastMessage(this@AuthorizationActivity, "Please enter all the fields")
+        val email = binding.etEmailSignInAuth.text.toString()
+        val password = binding.etPasswordSignInAuth.text.toString()
+
+        if (ValidationUtils().isValidEmail(email) && ValidationUtils().isValidPassword(password)) {
+            toastMessage(this@AuthorizationActivity, "All credentials are required")
         }
-        else if (binding.etPasswordSignInAuth.text.isNullOrBlank()) {
-            toastMessage(this@AuthorizationActivity, "Please enter all the fields")
+        else if (ValidationUtils().isValidEmailPattern(email)) {
+            toastMessage(this@AuthorizationActivity, "Please enter valid a email")
         }
-        else if (binding.etPasswordSignInAuth.text!!.length < 6) {
-            toastMessage(this@AuthorizationActivity, "Password must be at least 6 characters long")
+        else if (ValidationUtils().isValidPasswordLength(password)) {
+            toastMessage(this@AuthorizationActivity, "Password must be at least 8 characters long")
         }
         else {
-            val username = binding.etUsernameSignUpAuth.text.toString()
-            val email = binding.etEmailSignInAuth.text.toString()
-            val password = binding.etPasswordSignInAuth.text.toString()
-            runBlocking {
-                val emailPasswordCred = Credentials.emailPassword(email, password)
-                try {
-                    val user = app.login(emailPasswordCred)
-                    if (user != null) {
-                        MongoDB.configureTheRealm()
-                        MongoDB.addUserInfo(username, email)
-                        toastMessage(this@AuthorizationActivity, "Signing in")
-                        startActivity(Intent(this@AuthorizationActivity, MainActivity::class.java))
-                        finish()
-                    }
-                }
-                catch (e : Exception) {
-                    toastMessage(this@AuthorizationActivity, "Wrong Credentials")
-                }
-
-            }
+            Log.d("TAG", "hello")
+            toastMessage(this@AuthorizationActivity, "Signing in")
+            startActivity(Intent(this@AuthorizationActivity, MainActivity::class.java))
+            finish()
 
         }
+
     }
 
     private fun signUp() {
-        if (binding.etUsernameSignUpAuth.text.isNullOrBlank()) {
-            toastMessage(this@AuthorizationActivity, "Please enter all the fields")
-        }
-        else if (binding.etEmailSignUpAuth.text.isNullOrBlank()) {
-            toastMessage(this@AuthorizationActivity, "Please enter all the fields")
-        }
-        else if (binding.etPasswordSignUpAuth.text.isNullOrBlank()) {
-            toastMessage(this@AuthorizationActivity, "Please enter all the fields")
-        }
-        else if (binding.etConfirmPasswordSignUpAuth.text.isNullOrBlank()) {
-            toastMessage(this@AuthorizationActivity, "Please enter all the fields")
-        }
+        val username = binding.etUsernameSignUpAuth.text.toString()
+        val email = binding.etEmailSignUpAuth.text.toString()
+        val password = binding.etPasswordSignUpAuth.text.toString()
+        val confirmPassword = binding.etConfirmPasswordSignUpAuth.text.toString()
 
-        if (binding.etPasswordSignUpAuth.text!!.length < 6) {
-            toastMessage(this@AuthorizationActivity, "Password must be at least 6 characters long")
+        if (ValidationUtils().isValidUsername(username) && ValidationUtils().isValidEmail(email) && ValidationUtils().isValidPassword(password)) {
+            toastMessage(this@AuthorizationActivity, "All credentials are required")
+        }
+        else if (ValidationUtils().isValidEmailPattern(email)) {
+            toastMessage(this@AuthorizationActivity, "Please enter valid email")
+        }
+        else if (ValidationUtils().isValidPasswordLength(password)) {
+            toastMessage(this@AuthorizationActivity, "Password must be at least 8 characters")
+        }
+        else if (ValidationUtils().isValidConfirmPassword(password, confirmPassword)) {
+            toastMessage(this@AuthorizationActivity, "Password does not match")
         }
         else {
-            if (binding.etPasswordSignUpAuth.text.toString() != binding.etConfirmPasswordSignUpAuth.text.toString()) {
-                toastMessage(this@AuthorizationActivity, "Password does not match")
-            }
-            else {
-                val email = binding.etEmailSignUpAuth.text.toString()
-                val password = binding.etPasswordSignUpAuth.text.toString()
-                runBlocking {
-                    app.emailPasswordAuth.registerUser(email, password)
-                    toastMessage(this@AuthorizationActivity, "Signing up")
-                    startActivity(Intent(this@AuthorizationActivity, SplashScreenActivity::class.java))
-                    finish()
-                }
 
+            runBlocking {
+                val user = User(
+                    username = username,
+                    email = email.trim(),
+                    password = password
+                )
+                db.registerUser(user)
+                toastMessage(this@AuthorizationActivity, "Signing up")
+                intent = Intent(this@AuthorizationActivity, SplashScreenActivity::class.java)
+                startActivity(intent)
+                finish()
             }
-
         }
     }
 
     private fun checkPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
-            PackageManager.PERMISSION_GRANTED) {
+            PackageManager.PERMISSION_GRANTED
+        ) {
             Log.d("TAG", "Permission Granted")
-        }
-        else {
+        } else {
             ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.POST_NOTIFICATIONS),
@@ -218,14 +204,13 @@ class AuthorizationActivity : BaseActivity() {
         if (requestCode == POST_NOTIFICATION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.d("TAG", "Permission Granted")
-            }
-            else {
+            } else {
                 openPermissionAlertDialog()
             }
         }
     }
 
-    private fun onKeyboardVisibility(isVisible : Boolean) {
+    private fun onKeyboardVisibility(isVisible: Boolean) {
         if (!isVisible) {
             binding.etEmailSignInAuth.clearFocus()
             binding.etPasswordSignInAuth.clearFocus()
@@ -244,12 +229,12 @@ class AuthorizationActivity : BaseActivity() {
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
         )
 
-        val alertDialog : AlertDialog.Builder = AlertDialog.Builder(this)
+        val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
         alertDialog.setMessage("This App requires to send message")
         alertDialog.setPositiveButton("Try Again")
-        {_, _ -> checkPermissions() }
+        { _, _ -> checkPermissions() }
         alertDialog.setNegativeButton("Settings")
-        {_, _ ->
+        { _, _ ->
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             intent.addCategory(Intent.CATEGORY_DEFAULT)
             val packageName = "com.example.gossip"
@@ -263,8 +248,9 @@ class AuthorizationActivity : BaseActivity() {
 
         }
 
-        val alert : AlertDialog = alertDialog.create()
+        val alert: AlertDialog = alertDialog.create()
         alert.setCancelable(false)
         alert.show()
     }
+
 }

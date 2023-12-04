@@ -7,16 +7,16 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_logOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_gravity="center" />
+        android:text="LOG OUT"
+        android:background="@drawable/round_button"
+        android:backgroundTint="@color/material_dynamic_primary50"
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_gravity="center" />
+    </androidx.appcompat.widget.AppCompatButton>
 
 </LinearLayout>
